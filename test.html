@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>תאריך לועזי לתאריך עברי</title>
+</head>
+<body>
+  <h1>תאריך לועזי לתאריך עברי</h1>
+  <label for="gregorianDate">הזן תאריך לועזי:</label>
+  <input type="date" id="gregorianDate">
+  <button onclick="convertDate()">המר</button>
+  <br>
+  <label for="hebrewDate">תאריך עברי:</label>
+  <span id="hebrewDate"></span>
+  <script>
+    function convertDate() {
+      let gregorianDate = document.getElementById('gregorianDate').value;
+      let url = 'https://www.hebcal.com/converter/?cfg=json&date=' + gregorianDate + '&g2h=1';
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          let hebrewDate = data.hebrew;
+          document.getElementById('hebrewDate').innerText = hebrewDate;
+        })
+        .catch(error => console.error(error));
+    }
+  </script>
+</body>
+</html>
